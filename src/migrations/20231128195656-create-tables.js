@@ -12,6 +12,8 @@ module.exports = {
           temperature: Sequelize.DataTypes.INTEGER,
           moisture: Sequelize.DataTypes.INTEGER,
           updated_at: Sequelize.DataTypes.DATE,
+          created_at: Sequelize.DataTypes.DATE,
+          deleted_at: Sequelize.DataTypes.DATE,
         }, { transaction: t }),
         queryInterface.createTable('Weather', {
           id: {
@@ -23,6 +25,8 @@ module.exports = {
           humidity: Sequelize.DataTypes.INTEGER,
           type: Sequelize.DataTypes.STRING,
           updated_at: Sequelize.DataTypes.DATE,
+          created_at: Sequelize.DataTypes.DATE,
+          deleted_at: Sequelize.DataTypes.DATE,
         }, { transaction: t }),
       ])
     })
