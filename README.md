@@ -10,4 +10,4 @@ Uses:
 
 How to run:
 
-with docker installed, run the command `./docker-start.sh` to automatically create a postgres db, run migrations, and start the api
+with docker installed and running, run the command `docker-compose up --build` to automatically create a postgres db, run migrations, seed the database, and start the api

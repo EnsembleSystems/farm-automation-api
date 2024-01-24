@@ -5,28 +5,27 @@ import {
   CreatedAt,
   UpdatedAt,
   DeletedAt,
-  Unique,
-  HasMany,
 } from 'sequelize-typescript';
-import Measurement from './measurement.model';
 
 @Table({ 
-  tableName: 'planter', 
-  modelName: 'planter',
+  tableName: 'weather', 
+  modelName: 'weather',
 })
-export default class Planter extends Model {
+export default class Weather extends Model {
   @Column({ 
     autoIncrement: true, 
     primaryKey: true
   })
   id: number;
 
-  @Unique
   @Column
-  name: string;
+  temperature: number;
 
-  @HasMany(() => Measurement)
-  measurements: Measurement[];
+  @Column
+  humidity: number;
+
+  @Column
+  type: string;
 
   @CreatedAt
   createdAt: Date;

@@ -3,7 +3,7 @@
     "target": "es6",                                  
     "experimentalDecorators": true,                   
     "emitDecoratorMetadata": true,                    
-    "module": "nodenext",                             
+    "module": "node16",                             
     "rootDir": "./src",                               
     "outDir": "dist",                                   
     "forceConsistentCasingInFileNames": true,         
@@ -12,7 +12,13 @@
     "allowJs": true,
     "strictPropertyInitialization": false,
     "useDefineForClassFields": false,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "paths": {
+      "@config/*": ["src/config/*"],
+      "@models/*": ["src/models/*"],
+      "@routes/*": ["src/routes/*"]
+    }
   },
   "include": ["src/**/*"]
 }

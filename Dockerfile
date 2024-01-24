@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:20
 
 WORKDIR /usr/src/app
 
@@ -9,6 +9,7 @@ RUN npm ci
 COPY . .
 
 EXPOSE 8080
+EXPOSE 5432
 
 # Run app
-CMD [ "npm", "start" ]
+CMD [ "/bin/bash", "-c", "npm run setup; node ./dist/server.js" ]

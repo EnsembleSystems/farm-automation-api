@@ -6,16 +6,25 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
-    "start": "ts-node src/index.ts",
-    "dev": "ts-node-dev src/index.ts",
-    "migrate": "npm run build && npx sequelize-cli db:migrate"
+    "start": "ts-node src/server.ts",
+    "dev": "ts-node-dev src/server.ts",
+    "setup": "npm run build && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "_moduleAliases": {
+    "@config": "dist/config",
+    "@models": "dist/models",
+    "@routes": "dist/routes"
+  },
   "dependencies": {
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "express-validator": "^7.0.1",
+    "module-alias": "^2.2.3",
+    "node-fetch": "^3.3.2",
+    "pg": "^8.11.3",
     "pg-promise": "^11.5.4",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.35.1",
@@ -26,6 +35,7 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^20.9.4",
+    "@types/node-fetch": "^2.6.11",
     "@types/validator": "^13.11.7",
     "sequelize-cli": "^6.6.2",
     "ts-node-dev": "^2.0.0"
