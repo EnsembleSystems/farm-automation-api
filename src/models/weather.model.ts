@@ -25,7 +25,7 @@ export default class Weather extends Model {
   humidity: number;
 
   @Column
-  type: string;
+  condition: string;
 
   @CreatedAt
   createdAt: Date;
