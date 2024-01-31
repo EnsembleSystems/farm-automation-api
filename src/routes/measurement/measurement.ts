@@ -1,13 +1,18 @@
 import { Router, Request, Response } from 'express';
 import { body, validationResult, matchedData } from 'express-validator';
+import { Op } from 'sequelize';
 import sequelize from '@config/database';
 import Measurement from '@models/measurement.model';
 import Planter from '@models/planter.model';
 
 const router = Router();
 
-const validateGet = [
+const validateGetMeasurement = [
   body('name', 'a planter name is required').notEmpty().escape(),
+];
+
+const validateGetMeasurements = [
+  body('names', 'planter names are required').notEmpty().escape(),
 ];
 
 const validatePut = [
@@ -16,7 +21,7 @@ const validatePut = [
   body('moisture', 'a moisture value is required').notEmpty().escape(),
 ];
 
-router.post('/measurement', ...validateGet, async (req: Request, res: Response) => {
+router.post('/measurement', ...validateGetMeasurement, async (req: Request, res: Response) => {
   const result = validationResult(req);
   if (result.isEmpty()) {
     const fields = matchedData(req);
@@ -29,6 +34,29 @@ router.post('/measurement', ...validateGet, async (req: Request, res: Response) 
         return res.status(404);
       }
       return res.json({ measurement });
+    } catch (err) {
+      console.log(err);
+      return res.status(500);
+    }
+  }
+  return res.status(400).json({ errors: result.array() });
+});
+
+router.post('/measurements', ...validateGetMeasurements, async (req: Request, res: Response) => {
+  const result = validationResult(req);
+  if (result.isEmpty()) {
+    const fields = matchedData(req);
+    try {
+      const measurements = await Measurement.findAll({
+        where: { '$planter.name$': {
+          [Op.in]: fields.names, 
+        }},
+        include: 'planter'
+      });
+      if (!measurements) {
+        return res.status(404);
+      }
+      return res.json({ measurements });
     } catch (err) {
       console.log(err);
       return res.status(500);

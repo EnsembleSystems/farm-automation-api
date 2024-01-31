@@ -62,7 +62,7 @@ module.exports = {
           },
           temperature: Sequelize.DataTypes.INTEGER,
           humidity: Sequelize.DataTypes.INTEGER,
-          type: Sequelize.DataTypes.STRING,
+          condition: Sequelize.DataTypes.STRING,
           createdAt: {
             type: Sequelize.DataTypes.DATE,
             defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
