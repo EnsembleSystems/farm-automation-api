@@ -8,13 +8,20 @@ services:
       POSTGRES_DB: farm
       POSTGRES_USER: farmer
       POSTGRES_PASSWORD: placeholder-pw
-      PGPORT: 5432
+      PGPORT: 5433
     ports:
-      - "127.0.0.1:5432:5432"
+      - "5433:5433"
   api:
     build: .
     restart: always
+    environment:
+      DATABASE: farm
+      DATABASE_USERNAME: farmer
+      DATABASE_PASSWORD: placeholder-pw
+      DB_HOSTNAME: db
+      DB_PORT: 5433
+      API_PORT: 8080
     ports:
-      - "127.0.0.1:8080:8080"
+      - "8080:8080"
     depends_on:
       - db
