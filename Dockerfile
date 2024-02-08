@@ -9,7 +9,7 @@ RUN npm ci
 COPY . .
 
 EXPOSE 8080
-EXPOSE 5432
+EXPOSE 5433
 
 # Run app
 CMD [ "/bin/bash", "-c", "npm run setup; node ./dist/server.js" ]
